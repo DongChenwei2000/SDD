@@ -229,8 +229,8 @@ def train(args, model, siamese_model, train_dataloader, train_length, epoch, sch
 
         weight = (mbankI_ori_loss/mbank_img_new_loss + mbankT_ori_loss/mbank_txt_new_loss)/2 
         wei = torch.where(weight<1, torch.tanh(weight), 1)
-        # batch_loss = torch.mean(wei * (batch_i2t_ori_loss + batch_t2i_ori_loss)/2)
-        batch_loss = torch.mean((batch_i2t_ori_loss + batch_t2i_ori_loss)/2)
+        batch_loss = torch.mean(wei * (batch_i2t_ori_loss + batch_t2i_ori_loss)/2)
+        # batch_loss = torch.mean((batch_i2t_ori_loss + batch_t2i_ori_loss)/2)
         sloss = sloss + batch_loss
 
         optimizer.zero_grad()
